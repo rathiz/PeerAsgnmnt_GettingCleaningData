@@ -68,6 +68,11 @@ by consolidating data from both test and training sets.
 	colnames(dfX0) = dfCols$colName		### name the 561 columns of the X*.txt file
 
 	dfX = cbind(subject=vSubject, activityCd=vActivity, activity="", dfX0[,colsToKeep])
+	dfData = if (is.null(dfData)){
+		dfX
+	} else {
+		rbind(dfData, dfX)
+	}
 
 we map activity code to descriptive label using data.table construct ':=' and delete
 the activity code column.
