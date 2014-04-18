@@ -52,21 +52,17 @@ And create a vector having .std. or .mean. patterns to extract data for the stud
 Since the test and train datafiles are organized neatly, we can iterate over them 
 to create the final raw dataset having only mean and std columns.
 
-	dfData = NULL
-	for (domain in c("train", "test")) {
-
 we create subject vector from subject_*.txt file and activity vector from y_*.txt file
 
 	vSubject = read.table(paste("subject_", domain, ".txt", sep=""), stringsAsFactor=F)$V1
 	vActivity = read.table(paste("y_", domain, ".txt", sep=""), stringsAsFactor=F)$V1
 
 Read the necessary X_* raw datafile using read.table. fread from data.table can't
-be used as it errors out due to spaces in the beginning of lines.
-
-After reading the datafile, we name all the 561 columns. From this data frame
-we extract the mean and std data items along with subjects, activity codes. 
-At this stage we also put a placeholder for the activity label. This gets us the
-final data frame by consolidating data from both test and training sets.
+be used as it errors out due to spaces in the beginning of lines.  After reading 
+the datafile, we name all the 561 columns. From this data frame we extract the 
+mean and std data items along with subjects, activity codes.  At this stage we 
+also put a placeholder for the activity label. This gets us the final data frame 
+by consolidating data from both test and training sets.
 
 	dfX0 = read.table(paste("X_", domain, ".txt", sep=""), stringsAsFactor=F)
 	colnames(dfX0) = dfCols$colName		### name the 561 columns of the X*.txt file
